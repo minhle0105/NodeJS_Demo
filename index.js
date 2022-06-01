@@ -21,7 +21,7 @@ app.use(cors({
 const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
-    password: 'minhle123',
+    password: 'Quynh4486@^!)',
     database: 'theton'
 })
 
@@ -41,13 +41,14 @@ app.get('/theton', (request, response) => {
     // truy vấn vào database bằng câu lệnh, sẽ xảy ra 2 trường hợp
     // 1. error --> ko lấy được, trả về lỗi 400
     // 2. lấy thành công --> trả về dữ liệu
-    db.query("SELECT * FROM ton;", (error, result) => {
+    db.query("select * from theton.tonfamily;", (error, result) => {
         if (error) {
             console.log("Cannot get data"); // for debugging
+            console.log(error);
             response.status(400);
         }
         else {
-            response.send(result);
+            response.status(200).send(result);
         }
     })
 })
@@ -57,3 +58,9 @@ app.get('/theton', (request, response) => {
 // 1. Request line (ko quan trọng lắm)
 // 2. Request header (nắm những thông tin phụ để phục vụ request)
 // 3. Request body (quan trọng nhất, chứa thông tin chính của request)
+
+// cài thư viện để tự chạy lại server : nodemon
+// npm install --save-dev nodemon
+// cài vào dev dependency để không bị dùng lúc deploy --> giảm tải cho hệ thống
+// "start": "nodemon index.js" vào phần script ở trong package.json
+// sau đó chạy bằng npm start
